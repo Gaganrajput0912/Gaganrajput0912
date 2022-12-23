@@ -31,6 +31,7 @@
                 <li class="list-group-item">Item 4</li>
                 <!-- <li>Item 5</li> -->
             </ul>
+            <h2></h2>
         </div>
     </div>
     <script>
@@ -73,35 +74,76 @@
         //     li[i].style.backgroundColor = 'orange'
         // }
 
-        var header = document.querySelector('#main-header')
-        header.style.borderBottom = 'solid 4px black'
-        var input = document.querySelector('input')
-        input.value = 'Hello World'
-        var submit = document.querySelector('input[type="submit"]')
-        submit.value = "SEND"
-        var item = document.querySelector('.list-group-item')
-        item.style.color = 'red'
-        var lastItem = document.querySelector('.list-group-item:last-child')
-        lastItem.style.color = 'blue'
+        // var header = document.querySelector('#main-header')
+        // header.style.borderBottom = 'solid 4px black'
+        // var input = document.querySelector('input')
+        // input.value = 'Hello World'
+        // var submit = document.querySelector('input[type="submit"]')
+        // submit.value = "SEND"
+        // var item = document.querySelector('.list-group-item')
+        // item.style.color = 'red'
+        // var lastItem = document.querySelector('.list-group-item:last-child')
+        // lastItem.style.color = 'blue'
 
-        var secondItem = document.querySelector('.list-group-item:nth-child(2)')
-        secondItem.style.backgroundColor = 'green'
-        var thirdItem = document.querySelector('.list-group-item:nth-child(3)')
-        // thirdItem.style.visibility = 'hidden'
-        var titles = document.querySelectorAll('.title')
-        console.log(titles)
-        titles[1].style.color = 'green'
-        titles[0].textContent = 'Hello'
-        var odd = document.querySelectorAll('li:nth-child(odd)');
-        console.log(odd)
-        var even = document.querySelectorAll('li:nth-child(even)');
-        console.log(odd)
+        // var secondItem = document.querySelector('.list-group-item:nth-child(2)')
+        // secondItem.style.backgroundColor = 'green'
+        // var thirdItem = document.querySelector('.list-group-item:nth-child(3)')
+        // // thirdItem.style.visibility = 'hidden'
+        // var titles = document.querySelectorAll('.title')
+        // console.log(titles)
+        // titles[1].style.color = 'green'
+        // titles[0].textContent = 'Hello'
+        // var odd = document.querySelectorAll('li:nth-child(odd)');
+        // console.log(odd)
+        // var even = document.querySelectorAll('li:nth-child(even)');
+        // console.log(odd)
 
-        for (var i = 0; i < odd.length; i++) {
-            odd[i].style.backgroundColor = 'green'
-            // even[i].style.backgroundColor = 'green'
-        }
+        // for (var i = 0; i < odd.length; i++) {
+        //     odd[i].style.backgroundColor = 'green'
+        //     // even[i].style.backgroundColor = 'green'
+        // }
+        var itemList = document.querySelector('#items')
+        console.log(itemList.parentNode)
+        itemList.parentNode.style.backgroundColor = 'yellow'
+        console.log(itemList.parentNode.parentNode)
 
+        console.log(itemList.parentElement)
+        itemList.parentElement.style.backgroundColor = 'yellow'
+        console.log(itemList.parentElement.parentElement.parentElement)
+
+        console.log(itemList.childNodes)
+        console.log(itemList.children)
+        console.log(itemList.children[1])
+        itemList.children[1].style.backgroundColor = 'yellow'
+
+
+        console.log(itemList.firstChild)
+        itemList.firstElementChild.style.backgroundColor = 'green'
+
+        console.log(itemList.lastChild)
+        itemList.lastElementChild.style.backgroundColor = 'orange'
+
+        console.log(itemList.nextSibling)
+        console.log(itemList.nextElementSibling)
+
+        console.log(itemList.previousSibling)
+        console.log(itemList.previousElementSibling)
+
+        var newdiv = document.createElement('div')
+        newdiv.className = 'hello1'
+        newdiv.id = 'hello1'
+        newdiv.setAttribute('title', 'Hello Div')
+        var tn = document.createTextNode('HEllo')
+        newdiv.appendChild(tn)
+        console.log(newdiv)
+
+        var container = document.querySelector('header .container')
+        var h1 = document.querySelector('header h1')
+        container.insertBefore(newdiv, h1)
+
+        var itm = document.getElementById('items')
+        var first = document.querySelector('ul .list-group-item')
+        itm.insertBefore(newdiv, first)
     </script>
 
 </body>
