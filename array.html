@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    const nums = new Array(1, 2, 3, 4);
+    console.log(nums)
+    n = Math.max(...nums)
+    console.log(n)
+    const f = ['a', 'b']
+    console.log(f)
+
+    f[2] = 'c'
+    f.push('d')
+    f.unshift('0')
+    console.log(f)
+    f.pop()
+    console.log(f)
+    console.log(Array.isArray(f))
+    console.log(Array.isArray('f'))
+    console.log(f.indexOf('0'))
+
+    console.log(...f)
+    function Person(firstname, lastname, dob) {
+
+        this.firstname = firstname;
+
+        this.lastname = lastname;
+
+        this.dob = new Date(dob);
+        this.getBirthYear = function () {
+            return this.dob.getFullYear();
+        }
+
+        this.getFullName = function () {
+            return `${this.firstname} ${this.lastname}`
+        }
+
+    }
+
+    const person1 = new Person('john', 'doe', '04-03-1980');
+
+    const person2 = new Person('mary', 'doe', '07-03-1980');
+
+
+
+    console.log(person1);
+
+    console.log(person2);
+
+    console.log(person2.dob);
+
+    console.log(person2.dob.getFullYear());
+    console.log(person1.getBirthYear());
+    console.log(person1.getFullName());
+
+    let count = 0;
+    class User {
+        constructor(username, email, password) {
+            this.username = username;
+            this.email = email;
+            this.password = password;
+        }
+        countUsers() {
+            ++count;
+            console.log('There are ' + count + ' users is registered')
+        }
+        register() {
+            console.log(this.username + ' is now registered');
+        }
+    }
+
+    let bob = new User('bob', 'abc@gmail.com', '123');
+    bob.register();
+    // User.countUsers(); // Static->Call By only Class
+    bob.countUsers();
+    class Member extends User {
+        constructor(username, email, password, mpackage) {
+            super(username, password, email)
+            this.mpackage = mpackage
+            let todayDate = new Date();
+            const membershipactivetillYear = todayDate.getFullYear()
+            const membershipactivetillMonth = todayDate.getMonth()
+            const membershipactivetillDay = todayDate.getDay()
+            this.membershipactivetilldate = new Date(
+                membershipactivetillYear,
+                membershipactivetillMonth + 1,
+                membershipactivetillDay
+            )
+        }
+        getPackage() {
+            console.log(this.username + ' is subscribed to the ' + this.mpackage)
+
+        }
+        renewMembership() {
+            const membershipactivetillYear = todayDate.getFullYear()
+            const membershipactivetillMonth = todayDate.getMonth()
+            const membershipactivetillDay = todayDate.getDay()
+            if (this.package === 'Standard Package') {
+                this.membershipactivetilldate = new Date(
+                    membershipactivetillYear,
+                    membershipactivetillMonth + 1,
+                    membershipactivetillDay
+                )
+            }
+            else if (this.package === 'Yearly Package') {
+                this.membershipactivetilldate = new Date(
+                    membershipactivetillYear + 1,
+                    membershipactivetillMonth,
+                    membershipactivetillDay
+                )
+            }
+
+        }
+
+        subscriptionActiveTill() {
+            console.log(
+                this.username + ' is subscribed to ' +
+                this.package + ' uptill' +
+                this.membershipactivetilldate
+            )
+        }
+
+    }
+
+    const jas = new Member('jas', 'frt@gmail.com', '406', 'Yearly Package')
+    const mike = new Member('mike', 'bcd@gmail.com', '456', 'Standard Package')
+    jas.register();
+    jas.getPackage();
+    jas.countUsers();
+    jas.subscriptionActiveTill();
+
+    mike.register();
+    mike.getPackage();
+    mike.countUsers();
+    mike.subscriptionActiveTill();
+
+</script>
+
+</html>

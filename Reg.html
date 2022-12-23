@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="reg.js"></script>
+
+</head>
+
+<body>
+
+    <div class="main">
+        <div class="upper">
+
+            <h2 class="head">Book a call</h3>
+                <h4 class="line">
+                    Book a call slot and our reperesentative will call you within 1hr of selected time
+                </h4>
+        </div>
+        <div class="lower">
+            <form action="#">
+                <label>Name</label>
+                <input type="text" name="username" id="name">
+                <br><br>
+                <label>Email</label>
+                <input type="email" name="email" id="email">
+                <br><br>
+                <label>Phone</label>
+                <input type="number" name="number" id="number">
+                <br><br>
+                <label>Time for Call :</label>
+                <br><br>
+                <div class="dt">
+                    <div class="date">
+                        <input type="date" name="date" id="date">
+                    </div>
+                    &nbsp &nbsp &nbsp &nbsp
+                    <br>
+                    <div class="time">
+                        <input type="time" name="time" id="time">
+                    </div>
+                </div>
+                <br><br>
+                <button id="sub">GET A CALL</button>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+<style>
+    .dt {
+        display: flex;
+        justify-content: center;
+    }
+
+    .main {
+        border: 2px solid;
+        padding: 10px;
+        text-align: center;
+        width: 500px;
+        margin: auto;
+        background-color: greenyellow;
+
+    }
+
+    label {
+        font-size: 20px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: lighter;
+    }
+
+    .head {
+        color: rgb(125, 95, 39);
+        font-family: algerian;
+        font-size: 30px;
+    }
+
+    .line {
+        color: black;
+        font-size: 18px;
+
+    }
+
+    #sub {
+        background-color: orange;
+        text-align: center;
+        width: 100%;
+        color: white;
+        font-size: 18px;
+    }
+
+    #sub:hover {
+        background-color: green;
+    }
+
+    body {
+        background-color: orange;
+    }
+</style>
+
+</html>
