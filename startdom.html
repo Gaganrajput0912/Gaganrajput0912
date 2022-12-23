@@ -85,15 +85,25 @@
         lastItem.style.color = 'blue'
 
         var secondItem = document.querySelector('.list-group-item:nth-child(2)')
-        secondItem.style.color = 'coral'
-
+        secondItem.style.backgroundColor = 'green'
+        var thirdItem = document.querySelector('.list-group-item:nth-child(3)')
+        // thirdItem.style.visibility = 'hidden'
         var titles = document.querySelectorAll('.title')
         console.log(titles)
-
+        titles[1].style.color = 'green'
         titles[0].textContent = 'Hello'
         var odd = document.querySelectorAll('li:nth-child(odd)');
         console.log(odd)
+        var even = document.querySelectorAll('li:nth-child(even)');
+        console.log(odd)
+
+        for (var i = 0; i < odd.length; i++) {
+            odd[i].style.backgroundColor = 'green'
+            // even[i].style.backgroundColor = 'green'
+        }
+
     </script>
+
 </body>
 
 </html>
