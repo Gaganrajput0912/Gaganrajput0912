@@ -163,7 +163,9 @@
         var itemList = document.getElementById('items')
         subm.addEventListener('click', addItem)
         itemList.addEventListener('click', removeItem);
+        var filter = document.getElementById('filter')
 
+        filter.addEventListener('keyup', filteritems)
         function addItem(e) {
             e.preventDefault();
             var newitem = document.getElementById('item').value
@@ -186,7 +188,21 @@
             }
         }
 
+        function filteritems(e) {
 
+            var text = e.target.value.toLowerCase();
+            // Get lis
+            var items = itemList.getElementsByTagName('li');
+
+            Array.from(items).forEach(function (item) {
+                var itemName = item.firstChild.textContent;
+                if (itemName.toLowerCase().indexOf(text) != -1) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
 
 
     </script>
