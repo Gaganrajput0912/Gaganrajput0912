@@ -28,11 +28,41 @@ window.onload = function () {
         // localStorage.setItem('date', date)
         // localStorage.setItem('time', time)
         localStorage.setItem(obj.email, JSON.stringify(obj))
+        details = document.getElementById('details')
+        showNewUserOnScreen(obj)
+        window.addEventListener("DOMContentLoaded", () => {
+            const localStorageObj = localStorage;
+            const localstoragekeys = Object.keys(localStorageObj)
 
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i)
-            alert(`${key} : ${localStorage.getItem(key)}`)
-        }
+            for (var i = 0; i < localstoragekeys.length; i++) {
+                const key = localstoragekeys[i]
+                const userDetailsString = localStorageObj[key];
+                const userDetailsObj = JSON.parse(userDetailsString);
+                showNewUserOnScreen(userDetailsObj)
+            }
+        })
+
 
     });
+    function showNewUserOnScreen(user) {
+        const parentNode = document.getElementById('listOfUsers');
+        const childHTML = `<li id=${user.email}> ${user.name} - ${user.email} - ${user.number} - ${user.date} - ${user.time} <button "onclick=deleteUser('${user.email}")> Delete User </button> </li>`
+
+        parentNode.innerHTML = parentNode.innerHTML + childHTML;
+    }
+
+    function removeUserFromScreen(emailId) {
+        const parentNode = document.getElementById('listOfUsers');
+        const childNodeToBeDeleted = document.getElementById(emailId);
+
+        parentNode.removeChild(childNodeToBeDeleted)
+    }
+    function deleteUser(emailId) {
+        console.log(emailId)
+        localStorage.removeItem(emailId);
+        removeUserFromScreen(emailId);
+
+    }
+
+
 }
