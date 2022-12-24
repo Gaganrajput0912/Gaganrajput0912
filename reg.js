@@ -10,22 +10,24 @@ window.onload = function () {
             document.getElementById("number").value,
             document.getElementById("date").value,
             document.getElementById("time").value)
-
+        const name = document.getElementById("name").value
+        const email = document.getElementById("email").value
+        const number = document.getElementById("number").value
+        const date = document.getElementById("date").value
+        const time = document.getElementById("time").value;
+        const obj = {
+            name: name,
+            email: email,
+            number: number,
+            date: date,
+            time: time
+        }
+        localStorage.setItem('name', name)
+        localStorage.setItem('email', email)
+        localStorage.setItem('number', number)
+        localStorage.setItem('date', date)
+        localStorage.setItem('time', time)
+        localStorage.setItem('Userdetails', JSON.stringify(obj))
 
     });
 }
-
-function localS(e) {
-    const name = e.target.username.value
-    const email = e.target.email.value
-    const number = e.target.number.value
-    const date = e.target.date.value
-    const time = e.target.time.value;
-
-    localStorage.setItem('name', name)
-    localStorage.setItem('email', email)
-    localStorage.setItem('number', number)
-    localStorage.setItem('date', date)
-    localStorage.setItem('time', time)
-}
-
