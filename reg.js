@@ -22,12 +22,17 @@ window.onload = function () {
             date: date,
             time: time
         }
-        localStorage.setItem('name', name)
-        localStorage.setItem('email', email)
-        localStorage.setItem('number', number)
-        localStorage.setItem('date', date)
-        localStorage.setItem('time', time)
-        localStorage.setItem('Userdetails', JSON.stringify(obj))
+        // localStorage.setItem('name', name)
+        // localStorage.setItem('email', email)
+        // localStorage.setItem('number', number)
+        // localStorage.setItem('date', date)
+        // localStorage.setItem('time', time)
+        localStorage.setItem(obj.email, JSON.stringify(obj))
+
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i)
+            alert(`${key} : ${localStorage.getItem(key)}`)
+        }
 
     });
 }
