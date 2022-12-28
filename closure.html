@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+        let name = {
+            f: "abc",
+            l: "def",
+            printF: function () {
+                console.log(this.f + " " + this.l)
+            }
+        }
+        let print = function (home) {
+            console.log(this.f + " " + this.l + " " + home)
+        }
+        name.printF()
+        let name2 = {
+            f: "kfc",
+            l: "opf"
+        }
+        name.printF.call(name2)
+        print.call(name2, "dadri")//Call a function
+        print.apply(name2, ["dadri"])//ArrayList
+        let printM = print.bind(name2, "dadri")//Keep copy of function
+        printM()
+
+        let Student = {
+            age: 20
+
+        }
+        let callF = function () {
+            console.log(this.age)
+        }
+        let ageF = callF.bind(Student)
+        ageF()
+
+        // let multi = function (x, y) {
+        //     console.log(x * y)
+        // }
+        let multi = function (x) {
+            return function (y) {
+                console.log(x * y)
+            }
+        }
+        let multiplyby2 = multi(2)
+        multiplyby2(3)
+        let multiplyby3 = multi(3)
+        multiplyby3(10)
+        // let copymtwo = multi.bind(this, 2, 3)
+        // // copym(5)
+        // let copymthree = multi.bind(this, 3)
+        // copymtwo(5)
+        // copymthree(5)
+
+    </script>
+</body>
+
+</html>
