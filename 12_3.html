@@ -34,18 +34,35 @@
                 }
 
             }
+
+            setplacementage(minplacementage) {
+
+                return (minmarks) => {
+                    if (this.marks > minmarks && this.age > minplacementage) {
+                        console.log(this.name + " is ready for placement")
+                    }
+                    else {
+                        console.log(this.name + " is not ready for placement")
+                    }
+                }
+            }
         }
         const obj1 = new student('abc', 28, 1231412, 38)
         obj1.eligibile(obj1.age, obj1.marks)
+        obj1.setplacementage(18)(36)
         const obj2 = new student('ghc', 20, 1233212, 39)
         obj2.eligibile(obj2.age, obj2.marks)
+        obj2.setplacementage(19)(46)
         const obj3 = new student('aef', 24, 5131412, 40)
         obj3.eligibile(obj3.age, obj3.marks)
+        obj3.setplacementage(20)(39)
         const obj4 = new student('aht', 25, 9931412, 43)
 
         obj4.eligibile(obj4.age, obj4.marks)
+        obj4.setplacementage(18)(46)
         const obj5 = new student('rew', 22, 8831412, 50)
         obj5.eligibile(obj5.age, obj5.marks)
+        obj5.setplacementage(21)(34)
     </script>
 </body>
 
