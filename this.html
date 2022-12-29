@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    this inside an object<br>
+
+    this inside an method<br>
+
+    this inside a function<br>
+
+    this inside a constructor<br>
+
+    this inside a class<br>
+
+
+    <script>
+        'use strict'
+        this.table = 'window-table'
+        this.garage = {
+            table: 'garage table',
+            cleantable() {
+                console.log(`cleaning ${this.table}`)
+            }
+        }
+        console.log(this.garage.table);
+        //this inside an object
+        let johnsRoom = {
+            table: 'john table',
+            cleantable() {
+                console.log(`cleaning ${this.table}`)
+            }
+        }
+        // console.log(this.johnsRoom.table)
+        console.log(johnsRoom.table)
+
+        //this inside an method
+        johnsRoom.cleantable()
+        this.garage.cleantable()
+
+        //this inside a function
+        const cleantable = function (soap) {
+            // let that = this
+            const innerfunction = function () {
+                console.log(`cleaning ${this.table} using ${soap}`)
+            }
+            innerfunction.call(this, soap)
+
+        }
+        // cleantable() rescue by call
+        cleantable.call(this, 'some soap')
+        cleantable.call(this.garage, 'some soap')
+        cleantable.call(johnsRoom, 'some soap')
+
+        //this inside a constructor
+        let createroom = function (name) {
+            this.table = `${name} room`
+        }
+        const jillsroom = new createroom('jills')
+
+        createroom.prototype.cleantable = function (soap) {
+            console.log(`cleaning ${this.table} using ${soap}`)
+        }
+        jillsroom.cleantable('some soap')
+
+        //this inside a class
+        class createroom2 {
+            constructor(name) {
+                this.table = `${name}s table`
+
+            }
+            cleantable2 = function (soap) {
+                console.log(`cleaning ${this.table} using ${soap}`)
+            }
+        }
+        const jillsroom2 = new createroom2('jills')
+        jillsroom2.cleantable2('some soap')
+    </script>
+</body>
+
+</html>
