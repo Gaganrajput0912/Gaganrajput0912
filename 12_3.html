@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class student {
+            static count = 0
+            constructor(name, age, phone, marks) {
+                this.name = name
+                this.age = age
+                this.phone = phone
+                this.marks = marks
+                student.countStudent()
+
+            }
+            static countStudent() {
+
+                return (student.count++)
+
+            }
+            eligibile(age, marks) {
+                if (this.marks >= 40 && this.age >= 25) {
+                    console.log(`${this.name} is eligibile`)
+                }
+                else {
+                    console.log(`${this.name} is not eligibile`)
+                }
+
+            }
+        }
+        const obj1 = new student('abc', 28, 1231412, 38)
+        obj1.eligibile(obj1.age, obj1.marks)
+        const obj2 = new student('ghc', 20, 1233212, 39)
+        obj2.eligibile(obj2.age, obj2.marks)
+        const obj3 = new student('aef', 24, 5131412, 40)
+        obj3.eligibile(obj3.age, obj3.marks)
+        const obj4 = new student('aht', 25, 9931412, 43)
+
+        obj4.eligibile(obj4.age, obj4.marks)
+        const obj5 = new student('rew', 22, 8831412, 50)
+        obj5.eligibile(obj5.age, obj5.marks)
+    </script>
+</body>
+
+</html>
