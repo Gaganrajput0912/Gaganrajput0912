@@ -22,47 +22,53 @@ window.onload = function () {
             date: date,
             time: time
         }
+        axios.post("https://crudcrud.com/api/570fbe3fb2f045a392ba28963da3c6be/data", obj).then(res => console.log(res)).catch(err => console.log(res))
+    })
+
+
+
+}
         // localStorage.setItem('name', name)
         // localStorage.setItem('email', email)
         // localStorage.setItem('number', number)
         // localStorage.setItem('date', date)
         // localStorage.setItem('time', time)
-        localStorage.setItem(obj.email, JSON.stringify(obj))
-        details = document.getElementById('details')
-        showNewUserOnScreen(obj)
-        window.addEventListener("DOMContentLoaded", () => {
-            const localStorageObj = localStorage;
-            const localstoragekeys = Object.keys(localStorageObj)
+        //     localStorage.setItem(obj.email, JSON.stringify(obj))
+        //     details = document.getElementById('details')
+        //     showNewUserOnScreen(obj)
+        //     window.addEventListener("DOMContentLoaded", () => {
+        //         const localStorageObj = localStorage;
+        //         const localstoragekeys = Object.keys(localStorageObj)
 
-            for (var i = 0; i < localstoragekeys.length; i++) {
-                const key = localstoragekeys[i]
-                const userDetailsString = localStorageObj[key];
-                const userDetailsObj = JSON.parse(userDetailsString);
-                showNewUserOnScreen(userDetailsObj)
-            }
-        })
-
-
-    });
-    function showNewUserOnScreen(user) {
-        const parentNode = document.getElementById('listOfUsers');
-        const childHTML = `<li id=${user.email}> ${user.name} - ${user.email} - ${user.number} - ${user.date} - ${user.time} <button "onclick=deleteUser('${user.email}")> Delete User </button> </li>`
-
-        parentNode.innerHTML = parentNode.innerHTML + childHTML;
-    }
-
-    function removeUserFromScreen(emailId) {
-        const parentNode = document.getElementById('listOfUsers');
-        const childNodeToBeDeleted = document.getElementById(emailId);
-
-        parentNode.removeChild(childNodeToBeDeleted)
-    }
-    function deleteUser(emailId) {
-        console.log(emailId)
-        localStorage.removeItem(emailId);
-        removeUserFromScreen(emailId);
-
-    }
+        //         for (var i = 0; i < localstoragekeys.length; i++) {
+        //             const key = localstoragekeys[i]
+        //             const userDetailsString = localStorageObj[key];
+        //             const userDetailsObj = JSON.parse(userDetailsString);
+        //             showNewUserOnScreen(userDetailsObj)
+        //         }
+        //     })
 
 
-}
+        // });
+        // function showNewUserOnScreen(user) {
+        //     const parentNode = document.getElementById('listOfUsers');
+        //     const childHTML = `<li id=${user.email}> ${user.name} - ${user.email} - ${user.number} - ${user.date} - ${user.time} <button "onclick=deleteUser('${user.email}")> Delete User </button> </li>`
+
+        //     parentNode.innerHTML = parentNode.innerHTML + childHTML;
+        // }
+
+        // function removeUserFromScreen(emailId) {
+        //     const parentNode = document.getElementById('listOfUsers');
+        //     const childNodeToBeDeleted = document.getElementById(emailId);
+
+        //     parentNode.removeChild(childNodeToBeDeleted)
+        // }
+        // function deleteUser(emailId) {
+        //     console.log(emailId)
+        //     localStorage.removeItem(emailId);
+        //     removeUserFromScreen(emailId);
+
+        // }
+
+
+    // }
