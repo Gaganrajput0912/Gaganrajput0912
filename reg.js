@@ -59,7 +59,8 @@ window.onload = function () {
 }
 function showNewUserOnScreen(user) {
     const parentNode = document.getElementById('listOfUsers');
-    const childHTML = `<li id=${user.email}> ${user.name} - ${user.email} - ${user.number} - ${user.date} - ${user.time} <button onclick="deleteUser('${user.email}')"> Delete User </button> </li>`
+    const childHTML = `<li id=${user.email}> ${user.name} - ${user.email} - ${user.number} - ${user.date} - ${user.time} <button onclick="deleteUser('${user.email}')">X</button>
+     </li>`
 
     parentNode.innerHTML = parentNode.innerHTML + childHTML;
 }
@@ -72,8 +73,11 @@ function removeUserFromScreen(emailId) {
 }
 function deleteUser(emailId) {
     // console.log(emailId)
-    localStorage.removeItem(emailId);
-    removeUserFromScreen(emailId);
+    // localStorage.removeItem(emailId);
+    axios.delete(`https://crudcrud.com/api/5861d4a9f9154659b11b404cfab8138d/data/${emailId}`).then(res => {
+        removeUserFromScreen(emailId)
+    })
+
 
 }
 
