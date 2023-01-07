@@ -35,7 +35,7 @@ window.onload = function () {
         details = document.getElementById('details')
         showNewUserOnScreen(obj)
         window.addEventListener("DOMContentLoaded", () => {
-            axios.get("https://crudcrud.com/api/5861d4a9f9154659b11b404cfab8138d/data").then(res => {
+            axios.get("https://crudcrud.com/api/b925c44153b94e2a8210758edc5dcb5f/data").then(res => {
                 console.log(res)
                 for (var i = 0; i < res.data.length; i++) {
                     console.log(res.data[i])
@@ -60,9 +60,14 @@ window.onload = function () {
 function showNewUserOnScreen(user) {
     const parentNode = document.getElementById('listOfUsers');
     const childHTML = `<li id=${user.email}> ${user.name} - ${user.email} - ${user.number} - ${user.date} - ${user.time} <button onclick="deleteUser('${user.email}')">X</button>
-     </li>`
+    <button onclick="EditUser('${user.email}','${user.name}','${user.number}','${user.date}','${user.time}')">✎</button>  </li>`
 
     parentNode.innerHTML = parentNode.innerHTML + childHTML;
+    document.getElementById("name").value = ""
+    document.getElementById("email").value = ""
+    document.getElementById("number").value = ""
+    document.getElementById("date").value = ""
+    document.getElementById("time").value = ""
 }
 
 function removeUserFromScreen(emailId) {
@@ -74,11 +79,21 @@ function removeUserFromScreen(emailId) {
 function deleteUser(emailId) {
     // console.log(emailId)
     // localStorage.removeItem(emailId);
-    axios.delete(`https://crudcrud.com/api/5861d4a9f9154659b11b404cfab8138d/data/${emailId}`).then(res => {
+    axios.delete(`https://crudcrud.com/api/b925c44153b94e2a8210758edc5dcb5f/data/${emailId}`).then(res => {
+        console.log(res)
         removeUserFromScreen(emailId)
     })
 
 
+}
+
+function EditUser(emailId, name, number, date, time) {
+    document.getElementById("name").value = emailId
+    document.getElementById("email").value = name
+    document.getElementById("number").value = number
+    document.getElementById("date").value = date
+    document.getElementById("time").value = time
+    deleteUser(emailId)
 }
 
 
