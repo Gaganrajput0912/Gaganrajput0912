@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+</head>
+
+<body>
+    <form action="" id="form">
+        <h1 style="text-align:center">ExpenseTracker</h1>
+        <label for="expenseamount">Choose expenseamount:</label>
+        <input id="expenseamount" type="text">
+        <label for="description">Choose description:</label>
+        <input id="description" type="text">
+        <label for="category">Choose a category:</label>
+        <select name="category" id="category">
+            <option value="fuel">fuel</option>
+            <option value="food">food</option>
+            <option value="electricity">electricity</option>
+            <option value="movie">movie</option>
+        </select>
+        <input type="submit" value="add expense">
+
+    </form>
+    <ul id="listdetails">
+
+    </ul>
+    <script>
+        const expense = document.getElementById('expenseamount');
+        const description = document.getElementById('description');
+        const category = document.getElementById('category');
+        const form = document.getElementById('form');
+        form.addEventListener('submit', storeCrud);
+        //this will store all data to local storage;
+
+        function storeCrud(e) {
+            e.preventDefault();
+            let details = {
+                expense: expense.value,
+                description: description.value,
+                category: category.value
+
+            }
+            axios.post('https://crudcrud.com/api/9cbb04d75bb54d5a88fd5e5231aa4d22/expenses', details).then(res => {
+                showData(res.data);//show data on screen
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+        function showData(details) //show detail on screen
+        {
+
+            const parentNode = document.getElementById('listdetails')
+            const childHTML = `<li id=${details._id}> ${details.expense} - ${details.description} - ${details.category} 
+     <button onclick=deleteDetails('${details._id}')>X</button>
+    <button onclick=editDetails('${details._id}','${details.expense}','${details.description}','${details.category}')>✎</button></li>`
+            parentNode.innerHTML = parentNode.innerHTML + childHTML
+            // for clear inputs
+            expense.value = "";
+            description.value = "";
+        }
+        function deleteDetails(key) {
+            axios.delete(`https://crudcrud.com/api/9cbb04d75bb54d5a88fd5e5231aa4d22/expenses/${key}`).then(res => {
+                removeFromScreen(key)
+            })
+
+
+
+        }
+        function removeFromScreen(id) {
+            const parentNode = document.getElementById('listdetails');
+            const childNode = document.getElementById(id)
+            parentNode.removeChild(childNode)
+        }
+        function editDetails(key, ex, des, cat) {
+            expense.value = ex;
+            description.value = des;
+            category.value = cat;
+            deleteDetails(key)
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            axios.get('https://crudcrud.com/api/9cbb04d75bb54d5a88fd5e5231aa4d22/expenses').then(res => {
+                for (let i = 0; i < res.data.length; i++) {
+                    showData(res.data[i])
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
