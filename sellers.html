@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing products price</title>
+
+
+</head>
+
+<body>
+    <h1>Listing Products</h1>
+
+    <form action="#" id="my-form">
+        <div>
+            <label for="expense">Product Price:</label>
+            <input type="number" id="amount" placeholder="Enter Amount">
+        </div>
+
+        <div>
+            <label for="description">Product Name:</label>
+            <input type="text" id="description" placeholder="Enter Description">
+        </div>
+
+        <div>
+            <input type="submit" value="Add Product">
+        </div>
+    </form>
+
+    <h2>Products</h2>
+
+    <div>
+        <ul id="items" class="list-group">
+
+        </ul>
+    </div>
+
+    <div>
+        <h3 id="totalPrice-head">
+
+        </h3>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script>
+        let form = document.querySelector('#my-form');
+        let amount = document.querySelector('#amount');
+        let description = document.querySelector('#description');
+
+        var getAllProducts = [];
+
+        let count = 0;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            count++;
+
+            let expense = {
+                amount: amount.value,
+                description: description.value,
+            }
+
+
+            document.querySelector('#my-form').reset();
+
+            const expenseSeralized = JSON.stringify(expense);
+            localStorage.setItem(count + '. ' + expense.amount + expense.description, expenseSeralized);
+
+
+            //axios post request using crudcrud
+            axios.post('https://crudcrud.com/api/5fa850368d8c498897107ca162818bf2/productDetails', expense)
+                .then((res) => {
+                    console.log(res);
+                    getAllProducts.push(res.data)
+                    totalPrice();
+                })
+                .catch((err) => {
+                    console.error(err);
+                })
+
+            addListOfProducts(expense);
+        })
+
+
+        //creating list of products in html doc
+        function addListOfProducts(expense) {
+
+            var userId = expense._id;
+
+            console.log(userId);
+
+            const parentNode = document.getElementById("items");
+
+            const childHTML = `<li id=${expense._id}> ${expense.amount} ${expense.description} <button onclick=deleteUser('${expense._id}')>delete</button></li>`;
+
+            console.log(childHTML);
+
+            parentNode.innerHTML = parentNode.innerHTML + childHTML;
+
+        }
+
+
+        //to delete the product details in crud
+        function deleteUser(userId) {
+
+            removeProduct(userId);
+
+
+
+            axios.delete(`https://crudcrud.com/api/5fa850368d8c498897107ca162818bf2/productDetails/${userId}`)
+                .then((res) => {
+                    console.log(res);
+                    var filteredArr = getAllProducts.filter((n) =>
+                        n._id !== userId
+                    )
+
+                    getAllProducts = filteredArr;
+                    totalPrice();
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+
+
+        function removeProduct(userId) {
+            const parentNode = document.getElementById('items');
+            const childNodeToBeDeleted = document.getElementById(userId);
+
+            if (childNodeToBeDeleted) {
+                parentNode.removeChild(childNodeToBeDeleted);
+            }
+        }
+
+        function showExpense() {
+            axios.get('https://crudcrud.com/api/5fa850368d8c498897107ca162818bf2/productDetails')
+                .then((res) => {
+
+                    console.log(res);
+                    getAllProducts = res.data;
+                    totalPrice();
+
+                    for (let i = 0; i < res.data.length; i++) {
+                        addListOfProducts(res.data[i]);
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+
+        function totalPrice() {
+            let sum = 0;
+
+            for (let i = 0; i < getAllProducts.length; i++) {
+                sum += parseInt(getAllProducts[i].amount);
+            }
+
+            const parentNode1 = document.getElementById("totalPrice-head");
+            parentNode1.innerHTML = `The total value of product is: ${sum}`;
+        }
+
+        showExpense();
+    </script>
+</body>
+
+</html>
